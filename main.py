@@ -5,7 +5,10 @@ from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
+from langchain_tavily import TavilySearch
 from tavily import TavilyClient
+from typing import List
+from pydantic import BaseModel, Field
 
 import os
 os.system('cls')
@@ -25,7 +28,7 @@ def search(query: str) -> str:
 
 
 llm = ChatOpenAI()
-tools = [search]
+tools = [TavilySearch(), search]
 agent = create_agent(model=llm, tools=tools)
 
 def main():
